@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MVC.ViewModel.RoomViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+
+     Layout = "_Layout1";
+}
+
+<div class="container">
+  
+     <form asp-action="Index" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             <label  class="control-label badge badge-secondary">select Branch</label>
+            <div class="row">
+             <div class="form-group  col-10">
+               
+              
+              
+               <select  name="BranchId" id="BranchId" class="form-control">
+<option  value="0"></option>
+@foreach (var branch in ViewBag.Branches)
+                    {
+                       
+  <option  value="@branch.Id">@branch.Name</option>
+                       
+                       
+                    }
+                    
+               </select>
+              
+            </div>
+             <div class="form-group col-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+            </div>
+            </form>
+
+
+
+    <div class="row">
+
+ @foreach (var item in Model)
+    {
+       <div class="card col-3 m-4  " >
+            @{
+           var base64 = Convert.ToBase64String(item.PictureImg);
+           var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    }
+                  
+  <img class="card-img-top" src="@imgsrc" width="200" height="200" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Branch: <span class="badge badge-secondary">@item.Branch.Name</span></h5>
+    <hr>
+       <a asp-action="Details" asp-controller="Room" asp-route-id="@item.Id" class="btn  float-right bg-danger  "><h5><span class="badge badge-danger">Details</span></h5></a>
+  </div>
+</div>
+  
+    }
+   
+</div>

@@ -1,0 +1,105 @@
+﻿@model MVC.ViewModel.CreateCartViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+ <div class="card">
+  <h5 class="card-header">Featured</h5>
+  <div class="card-body">
+    @{
+                        var base64 = Convert.ToBase64String(ViewBag.Room.PictureImg);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+             }
+                   
+
+  <img src="@imgsrc" class="card-img-top" alt="..." height="300">
+  </div>
+</div>
+<hr />
+<div class="row ">
+
+       <div class="col">
+
+      <div class="card" style="width: 18rem;">
+       
+  <img src="@imgsrc" class="card-img-top" alt="..." height="300">
+  <div class="card-body">
+    <h5 class="card-title">Room Number:<span class="badge badge-secondary">@ViewBag.Room.RoomNumber</span></h5>
+   <h5 class="card-title">Room Price: <span class="badge badge-secondary">@ViewBag.Room.price</span></h5>
+   <h5 class="card-title">Type: <span class="badge badge-secondary"> @ViewBag.Room.RoomType.Name</span></h5>
+   <h5 class="card-title">Branch: <span class="badge badge-secondary"> @ViewBag.Room.Branch.Name</span></h5>
+   
+  </div>
+</div>
+         </div>
+
+
+
+
+    <div class="col ">
+         <div class="card bg-success text-white">
+    <div class="card-body">For Reservation please enter your date</div>
+  </div>
+        <form asp-action="Create"  asp-controller="Cart" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+         
+              <input asp-for="CustomerId" class="form-control" hidden />
+             <input asp-for="RoomId" class="form-control" hidden />
+         <input asp-for="TotalPrice" class="form-control" hidden/>
+         <input asp-for="TotalDays" class="form-control" hidden/>
+            <div class="form-group">
+                <label asp-for="FromDate" class="control-label"></label>
+                <input asp-for="FromDate" class="form-control" />
+                <span asp-validation-for="FromDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToDate" class="control-label"></label>
+                <input asp-for="ToDate" class="form-control" />
+                <span asp-validation-for="ToDate" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Add To Cart" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+  
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+  @* <div class="form-group">
+                <label asp-for="RoomId" class="control-label"></label>
+                <input asp-for="RoomId" class="form-control" />
+                <span asp-validation-for="RoomId" class="text-danger"></span>
+            </div>*@
+
+                   @* <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>*@
+
+                 @*<div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>*@
+
+                  @*  <div class="form-group">
+                <label asp-for="TotalPrice" class="control-label"></label>
+                <input asp-for="TotalPrice" class="form-control" />
+                <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>*@
+         @*   <div class="form-group">
+                <label asp-for="TotalDays" class="control-label"></label>
+                <input asp-for="TotalDays" class="form-control" />
+                <span asp-validation-for="TotalDays" class="text-danger"></span>
+            </div>*@

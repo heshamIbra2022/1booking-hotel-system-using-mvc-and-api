@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MVC.ViewModel.RoomViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PictureImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+          @*  <th>
+                @Html.DisplayNameFor(model => model.RoomBranchId)
+            </th>*@
+            <th>
+               @* @Html.DisplayNameFor(model => model.RoomBranchName)*@
+               Branch
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.RoomTypeId)
+            </th>*@
+            <th>
+               @* @Html.DisplayNameFor(model => model.RoomTypeName)*@
+                RoomType
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+              @*  @Html.DisplayFor(modelItem => item.PictureImg)*@
+                    @{
+                        var base64 = Convert.ToBase64String(item.PictureImg);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    }
+                    <img src="@imgsrc" width="50" height="50" >
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+           @* <td>
+                @Html.DisplayFor(modelItem => item.RoomBranchId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Branch.Name)
+            </td>
+         @*   <td>
+                @Html.DisplayFor(modelItem => item.RoomTypeId)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomType.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new {id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
